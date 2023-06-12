@@ -12,6 +12,7 @@ public class BoundedStreamWordCount {
 
 //        1. 创建执行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
 //        2. 读取数据
         DataStreamSource<String> streamSource = env.readTextFile("input/words.txt");
 //        3. 转换处理
