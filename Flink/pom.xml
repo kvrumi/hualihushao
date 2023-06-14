@@ -72,6 +72,12 @@
             <artifactId>flink-connector-datagen</artifactId>
             <version>${flink.version}</version>
         </dependency>
+        <!-- file connector-->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-files</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
     </dependencies>
 
     <!-- 打包插件 -->
