@@ -28,6 +28,7 @@ public class IFileSink {
 
         // 将流中的数据写入文件
         FileSink<Event> fileSink = FileSink.<Event>forRowFormat(new Path("output"), new SimpleStringEncoder<>())
+                // 滚动策略
                 .withRollingPolicy(
                         DefaultRollingPolicy.builder()
                                 // 文件的最大的大小
@@ -45,6 +46,7 @@ public class IFileSink {
                                 .withPartSuffix(".log") // 文件名后缀
                                 .build()
                 )
+                // 目录滚动
                 .withBucketAssigner(
                         new DateTimeBucketAssigner<>("yyyy-MM-dd HH-mm")
                 )

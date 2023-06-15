@@ -24,6 +24,7 @@ public class IJdbcSink {
 
         SinkFunction<Event> jdbcSink = JdbcSink.<Event>sink(
                 "replace into clicks1(user, url, ts) value(?,?,?)",
+                // Sql赋值
                 new JdbcStatementBuilder<Event>() {
                     @Override
                     public void accept(PreparedStatement preparedStatement, Event event) throws SQLException {
@@ -32,11 +33,13 @@ public class IJdbcSink {
                         preparedStatement.setLong(3, event.getTimestamp());
                     }
                 },
+                // 执行参数
                 JdbcExecutionOptions.builder()
                         .withBatchSize(5) // 批次大小
                         .withBatchIntervalMs(10000) // 批次间隔时间， 超过指定时间也要写入
                         .withMaxRetries(3)
                         .build(),
+                // 连接配置
                 new JdbcConnectionOptions.JdbcConnectionOptionsBuilder()
                         .withDriverName("com.mysql.cj.jdbc.Driver")
                         .withUrl("jdbc:mysql://hadoop102:3306/test")

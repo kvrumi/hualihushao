@@ -38,6 +38,7 @@ public class IKafkaSink {
                 // kafkaSink的默认的生产者事务的超时时间为：1 hour
                 // KafkaBroker默认允许的事务最大的超时时间为：15 minutes
                 .setProperty(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, "36000")
+                //.setProperty(ProducerConfig.ACKS_CONFIG,"-1")
                 .build();
 
         ds.map(Event::toString).sinkTo(kafkaSink);
